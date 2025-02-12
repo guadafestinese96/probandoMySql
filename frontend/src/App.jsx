@@ -52,6 +52,12 @@ function App() {
       getPerfumes();
       limpiarCampos();
       showSwal();
+    }).catch(function(error){
+      withReactContent(Swal).fire({
+        icon: 'error',
+        title: 'Error',
+        text: JSON.parse(JSON.stringify(error)).message === "Network Error" ? "Error del servidor" : JSON.parse(JSON.stringify(error)).message
+      })
     })
   }
 
@@ -66,6 +72,12 @@ function App() {
       getPerfumes();
       limpiarCampos();
       updateSwal();
+    }).catch(function(error){
+      withReactContent(Swal).fire({
+        icon: 'error',
+        title: 'Error',
+        text: JSON.parse(JSON.stringify(error)).message === "Network Error" ? "Error del servidor" : JSON.parse(JSON.stringify(error)).message
+      })
     })
   }
 
@@ -88,6 +100,13 @@ function App() {
             html: <i>{perfume.nombre} fue eliminado</i>,
             icon: "success"
           });
+        }).catch(function(error){
+          withReactContent(Swal).fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'No se logro eliminar el perfume',
+            footer: JSON.parse(JSON.stringify(error)).message === "Network Error" ? "Error del servidor" : JSON.parse(JSON.stringify(error)).message
+          })
         })
         
       }
